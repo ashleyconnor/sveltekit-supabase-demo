@@ -1,0 +1,21 @@
+{
+  "name": "my-cloudflare-workers-demo",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "svelte-kit dev",
+    "build": "svelte-kit build",
+    "preview": "svelte-kit preview"
+  },
+  "devDependencies": {
+    "@sveltejs/kit": "next",
+    "svelte": "^3.34.0"
+  },
+  "type": "module",
+  "dependencies": {
+    "@fontsource/fira-mono": "^4.2.2",
+    "@lukeed/uuid": "^2.0.0",
+    "@supabase/supabase-js": "^1.15.1",
+    "@sveltejs/adapter-cloudflare-workers": "^1.0.0-next.12",
+    "cookie": "^0.4.1"
+  }
+}
