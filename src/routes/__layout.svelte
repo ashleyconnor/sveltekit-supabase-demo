@@ -17,7 +17,7 @@
 <Header />
 
 <main>
-  {#if $page.query.get("magiclink")}
+  {#if $page.query.get("magic_link")}
     <span style="text-align: center;">Check your email for login link!</span>
   {/if}
   <slot />
@@ -27,7 +27,8 @@
   <p>
     visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to learn SvelteKit
   </p>
-  <code>Session: {JSON.stringify($session)}</code>
+  <h2>Session Data</h2>
+  <pre>{JSON.stringify($session, null, 2)}</pre>
 </footer>
 
 <style>
@@ -52,6 +53,12 @@
 
   footer a {
     font-weight: bold;
+  }
+
+  footer pre {
+    max-width: 1024px;
+    word-wrap: break-word;
+    white-space: pre-wrap;
   }
 
   @media (min-width: 480px) {
