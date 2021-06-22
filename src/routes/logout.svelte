@@ -5,10 +5,10 @@
   import { unsetAuthCookie } from "$lib/utils/session";
 
   async function signOut() {
-		await supabase.auth.signOut();
-		await unsetAuthCookie();
-		session.set(false);
-		goto("/");
+    await supabase.auth.signOut();
+    await unsetAuthCookie();
+    session.set({ user: { guest: true } });
+    goto("/");
   }
   signOut();
 </script>
