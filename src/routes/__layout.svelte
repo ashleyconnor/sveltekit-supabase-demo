@@ -3,7 +3,7 @@
 	import '../app.css';
 
 	import { supabase } from "$lib/supabaseClient";
-	import { session } from '$app/stores';
+	import { page, session } from '$app/stores';
 	import { setAuthCookie } from '$lib/utils/session';
 
 	supabase.auth.onAuthStateChange(async (event, _session) => {
@@ -18,6 +18,9 @@
 <Header />
 
 <main>
+	{#if $page.query.get("magiclink")}
+	<span style="text-align: center;">Check your email for login link!</span>
+	{/if}
 	<slot />
 </main>
 

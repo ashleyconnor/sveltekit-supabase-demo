@@ -19,6 +19,9 @@
     loading = false
 
     let redirect = $page.query.get("redirect") || "/";
+    if (!password) {
+      redirect = `${redirect}?magiclink=true`
+    }
     goto(redirect);
   }
 </script>
@@ -28,16 +31,16 @@
 </svelte:head>
 
 <form on:submit|preventDefault={loginUser}>
+  <h2>Login with Email Address and Password</h2>
   <div>
     <label for="email">Email</label>
     <input id="email" type="email" autocomplete="email" required bind:value={email} />
   </div>
   <div>
-    <label for="password">Password</label>
+    <label for="password (optional)">Password</label>
     <input
       id="password"
       type="password"
-      required
       bind:value={password}
     />
   </div>
