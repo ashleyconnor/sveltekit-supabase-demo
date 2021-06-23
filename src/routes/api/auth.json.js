@@ -9,7 +9,7 @@ export async function post(req /*, res: Response (read the notes below) */) {
   // `res` is used for setting the cookies
   return {
     status: 200,
-    body: null,
+    body: null
   };
 }
 
@@ -20,7 +20,7 @@ export async function get(req) {
   const { user } = await req.locals; // refer hooks.js to see how this is populated
   return {
     body: {
-      user,
-    },
+      user
+    }
   };
 }

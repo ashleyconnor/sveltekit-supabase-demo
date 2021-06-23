@@ -1,8 +1,8 @@
 <script>
-  import { goto } from "$app/navigation";
-  import { supabase } from "$lib/supabaseClient";
-  import { page } from "$app/stores";
-  import SocialLogin from "$lib/SocialLogin/index.svelte";
+  import { goto } from '$app/navigation';
+  import { supabase } from '$lib/supabaseClient';
+  import { page } from '$app/stores';
+  import SocialLogin from '$lib/SocialLogin/index.svelte';
 
   let loading = false;
 
@@ -14,7 +14,7 @@
     // if session is null user needs to confirm their email address
     let { user, error, session } = await supabase.auth.signUp({
       email,
-      password,
+      password
     });
 
     if (error) {
@@ -23,7 +23,7 @@
     }
 
     userStore.set({ user });
-    let redirect = $page.query.get("redirect") || "/";
+    let redirect = $page.query.get('redirect') || '/';
     goto(redirect);
   }
 </script>
@@ -49,18 +49,12 @@
       />
     </div>
     <div>
-      <input
-        id="password"
-        type="password"
-        placeholder="Password"
-        required
-        bind:value={password}
-      />
+      <input id="password" type="password" placeholder="Password" required bind:value={password} />
     </div>
 
     <div>
       <button type="submit" class="submit" disabled={loading}
-        >{loading ? "Loading ..." : "Register"}</button
+        >{loading ? 'Loading ...' : 'Register'}</button
       >
     </div>
   </form>

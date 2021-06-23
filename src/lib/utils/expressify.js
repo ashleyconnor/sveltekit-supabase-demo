@@ -1,4 +1,4 @@
-import * as cookie from "cookie";
+import * as cookie from 'cookie';
 
 /**
  * Converts a SvelteKit request to a Express compatible request.
@@ -9,7 +9,7 @@ import * as cookie from "cookie";
 export function toExpressRequest(req) {
   return {
     ...req,
-    cookies: cookie.parse(req.headers.cookie || ""),
+    cookies: cookie.parse(req.headers.cookie || '')
   };
 }
 
@@ -23,7 +23,7 @@ export function toExpressResponse(resp) {
     ...resp,
     getHeader: (header) => resp.headers[header.toLowerCase()],
     setHeader: (header, value) => (resp.headers[header.toLowerCase()] = value),
-    status: (_) => ({ json: (_) => {} }),
+    status: (_) => ({ json: (_) => {} })
   };
 }
 

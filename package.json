@@ -5,12 +5,15 @@
     "dev": "svelte-kit dev",
     "build": "svelte-kit build",
     "preview": "svelte-kit preview",
-    "format": "prettier --write --plugin-search-dir=. ./src/**/*{.js,.svelte,.html}"
+    "lint": "prettier --check --plugin-search-dir=. . && eslint --ignore-path .gitignore .",
+    "format": "prettier --write --plugin-search-dir=. ."
   },
   "devDependencies": {
     "@sveltejs/kit": "next",
-    "prettier": "^2.3.1",
-    "prettier-plugin-svelte": "^2.3.1",
+    "eslint-config-prettier": "^8.1.0",
+    "eslint-plugin-svelte3": "^3.2.0",
+    "prettier": "~2.2.1",
+    "prettier-plugin-svelte": "^2.2.0",
     "svelte": "^3.34.0"
   },
   "type": "module",

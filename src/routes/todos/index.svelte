@@ -1,37 +1,36 @@
 <script context="module">
-  import { enhance } from "$lib/form";
+  import { enhance } from '$lib/form';
 
   // see https://kit.svelte.dev/docs#loading
   export const load = async ({ fetch, session }) => {
-
-		// redirect to login if user is not logged in
-		if (!session?.user?.id) {
-			return {
-				status: 301,
-				redirect: "/login?redirect=/todos"
-			}
-		}
-    const res = await fetch("/todos.json");
+    // redirect to login if user is not logged in
+    if (!session?.user?.id) {
+      return {
+        status: 301,
+        redirect: '/login?redirect=/todos'
+      };
+    }
+    const res = await fetch('/todos.json');
 
     if (res.ok) {
       const todos = await res.json();
 
       return {
-        props: { todos },
+        props: { todos }
       };
     }
 
     const { message } = await res.json();
 
     return {
-      error: new Error(message),
+      error: new Error(message)
     };
   };
 </script>
 
 <script>
-  import { scale } from "svelte/transition";
-  import { flip } from "svelte/animate";
+  import { scale } from 'svelte/transition';
+  import { flip } from 'svelte/animate';
 
   export let todos;
 
@@ -62,14 +61,10 @@
         todos = [...todos, created];
 
         form.reset();
-      },
+      }
     }}
   >
-    <input
-      name="text"
-      aria-label="Add todo"
-      placeholder="+ tap to add a todo"
-    />
+    <input name="text" aria-label="Add todo" placeholder="+ tap to add a todo" />
   </form>
 
   {#each todos as todo (todo.id)}
@@ -84,20 +79,13 @@
         method="post"
         use:enhance={{
           pending: (data) => {
-            todo.is_complete = !!data.get("is_complete");
+            todo.is_complete = !!data.get('is_complete');
           },
-          result: patch,
+          result: patch
         }}
       >
-        <input
-          type="hidden"
-          name="is_complete"
-          value={todo.is_complete ? "false" : "true"}
-        />
-        <button
-          class="toggle"
-          aria-label="Mark todo as {todo.is_complete ? 'not done' : 'done'}"
-        />
+        <input type="hidden" name="is_complete" value={todo.is_complete ? 'false' : 'true'} />
+        <button class="toggle" aria-label="Mark todo as {todo.is_complete ? 'not done' : 'done'}" />
       </form>
 
       <form
@@ -105,15 +93,10 @@
         action="/todos/{todo.id}.json?_method=patch"
         method="post"
         use:enhance={{
-          result: patch,
+          result: patch
         }}
       >
-        <input
-          aria-label="Edit todo"
-          type="text"
-          name="task"
-          value={todo.task}
-        />
+        <input aria-label="Edit todo" type="text" name="task" value={todo.task} />
         <button class="save" aria-label="Save todo" />
       </form>
 
@@ -123,7 +106,7 @@
         use:enhance={{
           result: () => {
             todos = todos.filter((t) => t.id !== todo.id);
-          },
+          }
         }}
       >
         <button class="delete" aria-label="Delete todo" />

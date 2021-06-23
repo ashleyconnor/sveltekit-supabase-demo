@@ -1,13 +1,13 @@
 <script>
-  import Header from "$lib/Header/index.svelte";
-  import "../app.css";
+  import { supabase } from '$lib/supabaseClient';
+  import { page, session } from '$app/stores';
+  import { setAuthCookie } from '$lib/utils/session';
 
-  import { supabase } from "$lib/supabaseClient";
-  import { page, session } from "$app/stores";
-  import { setAuthCookie } from "$lib/utils/session";
+  import Header from '$lib/Header/index.svelte';
+  import '../app.css';
 
   supabase.auth.onAuthStateChange(async (event, _session) => {
-    if (event !== "SIGNED_OUT") {
+    if (event !== 'SIGNED_OUT') {
       session.set({ user: _session.user });
       await setAuthCookie(_session);
     }
@@ -17,7 +17,7 @@
 <Header />
 
 <main>
-  {#if $page.query.get("magic_link")}
+  {#if $page.query.get('magic_link')}
     <span style="text-align: center;">Check your email for login link!</span>
   {/if}
   <slot />

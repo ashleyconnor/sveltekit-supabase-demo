@@ -1,8 +1,8 @@
 <script>
-  import { goto } from "$app/navigation";
-  import { supabase } from "$lib/supabaseClient";
-  import { page } from "$app/stores";
-  import SocialLogin from "$lib/SocialLogin/index.svelte";
+  import { goto } from '$app/navigation';
+  import { supabase } from '$lib/supabaseClient';
+  import { page } from '$app/stores';
+  import SocialLogin from '$lib/SocialLogin/index.svelte';
 
   let loading = false;
 
@@ -13,16 +13,16 @@
     loading = true;
     let { error } = await supabase.auth.signIn({
       email,
-      password,
+      password
     });
 
     if (error) {
+      loading = false;
       alert(error);
       return;
     }
-    loading = false;
 
-    let redirect = $page.query.get("redirect") || "/";
+    let redirect = $page.query.get('redirect') || '/';
     if (!password) {
       redirect = `${redirect}?magic_link=true`;
     }
@@ -61,7 +61,7 @@
 
     <div>
       <button type="submit" class="submit" disabled={loading}>
-        {loading ? "Loading ..." : "Log In"}
+        {loading ? 'Loading ...' : 'Log In'}
       </button>
     </div>
 

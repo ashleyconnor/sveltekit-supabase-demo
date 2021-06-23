@@ -1,21 +1,10 @@
 <script>
-  import { goto } from "$app/navigation";
-  import { supabase } from "$lib/supabaseClient";
-  import { page } from "$app/stores";
+  import { supabase } from '$lib/supabaseClient';
 
   async function socialLogin(provider) {
-    let { user, error } = await supabase.auth.signIn({
-      provider,
+    await supabase.auth.signIn({
+      provider
     });
-
-    if (error) {
-      alert(error);
-      return;
-    }
-
-    userStore.set({ user });
-    let redirect = $page.query.get("redirect") || "/";
-    goto(redirect);
   }
 </script>
 
@@ -23,7 +12,7 @@
   <button
     class="social"
     on:click={() => {
-      socialLogin("github");
+      socialLogin('github');
     }}
   >
     <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
@@ -35,7 +24,7 @@
   <button
     class="social"
     on:click={() => {
-      socialLogin("twitter");
+      socialLogin('twitter');
     }}
   >
     <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"

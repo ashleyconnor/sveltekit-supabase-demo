@@ -1,23 +1,32 @@
-import { supabase } from "$lib/supabaseClient";
+import { supabase } from '$lib/supabaseClient';
 
 // GET /todos.json
-export const get = async (request) => {
-  let { data } = await supabase.from("todos").select("*");
+export const get = async (_) => {
+  let { data } = await supabase.from('todos').select('*');
   return {
-    body: data,
+    body: data
   };
 };
 
 // POST /todos.json
 export const post = async (request) => {
-  const { data } = await supabase.from("todos").upsert({
-    task: request.body.get("text"),
+  const { data, error } = await supabase.from('todos').upsert({
+    task: request.body.get('text'),
     is_complete: false,
     user_id: request.locals.user.id,
-    inserted_at: new Date().toISOString(),
+    inserted_at: new Date().toISOString()
   });
 
+  if (!error && request.headers.accept !== 'application/json') {
+    return {
+      status: 303,
+      headers: {
+        location: '/todos'
+      }
+    };
+  }
+
   return {
-    body: data[0],
+    body: data[0]
   };
 };
