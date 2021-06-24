@@ -1,7 +1,7 @@
 <script>
   import { supabase } from '$lib/supabaseClient';
   import { page, session } from '$app/stores';
-  import { setAuthCookie } from '$lib/utils/session';
+  import { setAuthCookie, unsetAuthCookie } from '$lib/utils/session';
 
   import Header from '$lib/Header/index.svelte';
   import '../app.css';
@@ -10,6 +10,9 @@
     if (event !== 'SIGNED_OUT') {
       session.set({ user: _session.user });
       await setAuthCookie(_session);
+    } else {
+      session.set({ user: { guest: true } });
+      await unsetAuthCookie();
     }
   });
 </script>

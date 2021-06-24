@@ -4,12 +4,9 @@
 
   import { goto } from '$app/navigation';
   import { supabase } from '$lib/supabaseClient';
-  import { unsetAuthCookie } from '$lib/utils/session';
 
   async function signOut() {
     await supabase.auth.signOut();
-    await unsetAuthCookie();
-    session.set({ user: { guest: true } });
     goto('/login?loggedOut=true');
   }
 </script>
